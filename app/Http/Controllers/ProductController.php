@@ -36,6 +36,12 @@ class ProductController extends Controller
                 ->where('id', $item['product_id'])
                 ->first();
 
+            if(!$product){
+                return response()->json([
+                    "result" => "Product Not Found"
+                ], 404);
+            }
+
             $object = new \stdClass();
             $object->product_name = $product->name;
             $object->product_qty = $item['quantity'];
